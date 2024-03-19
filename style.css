@@ -165,3 +165,7 @@ main {
   font-weight: 700;
   color: #c7365f;
 }
+/* дефиниране на правилото .hidden { display: none; }  */
+.hidden {
+  display: none;
+}
