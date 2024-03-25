@@ -1,26 +1,34 @@
 'use strict';
 
 //selecting element
-const player0El = document.querySelector('.scorre--0');
-const player1El = document.querySelector('.scorre--1');
 
-const score0El = document.querySelector('.score--0');
-const score1El = document.querySelector('.score--1');
+//отделяме резултата на всеки играч в собствена променслива за всеки играч
+
+const player1El = document.querySelector('.player--1');
+
+//оделяме всеки един резилтат с натрупване в променлива
+const score0El = document.querySelector('#score--0');
+const score1El = document.querySelectorById('score--1');
+// текущ резултат
+const current0El = document.querySelectorById('current--0');
+const current1El = document.querySelectorById('current--1');
+//зарчето
 const diceEl = document.querySelector('.dice');
-
+//изнасяне на бутоните
 const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
-const current0El = document.querySelectorById('current--0');
-const current1El = document.querySelectorById('current--1');
 //starting conditions
+//.textContent = 0; задава текстовото съдържание на този елемент на 0.
 score0El.textContent = 0;
 score1El.textContent = 0;
 diceEl.classList.add('hidden');
-
-const score = [0, 0];
+// точките на всеки играч
+const scores = [0, 0];
+//Тази променлива се използва за следене на текущият резултат на активния играч
 let currentScore = 0;
+// активен играч
 let activePlayer = 0;
 
 //rollind dice functionality
@@ -40,7 +48,14 @@ btnRoll.addEventListener('click', function () {
   } else {
     //swich to next player
     document.getElementById(`current--${activePlayer}`).textContent = 0;
+    currentScore = 0
     activePlayer = activePlayer === 0 ? 1 : 0;
-    currentScore = 0;
+    player0El.classList.toggle('player--active');
+    player1El.classList.toggle('player--active');
   }
+});
+
+btnHold.addEventListener('click', function () {
+  scores[1] = scores + currentScore;
+document.getElementById(`current--${activePlayer}`).textContent = scores[activePlayer]
 });
