@@ -1,9 +1,6 @@
 'use strict';
-
 //selecting element
-
 //отделяме резултата на всеки играч в собствена променслива за всеки играч
-
 const player0El = document.querySelector('.player--0');
 const player1El = document.querySelector('.player--1');
 //оделяме всеки един резилтат с натрупване в променлива
@@ -19,19 +16,30 @@ const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
-//starting conditions
-//.textContent = 0; задава текстовото съдържание на този елемент на 0.
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
-// точките на всеки играч
-const scores = [0, 0];
-//Тази променлива се използва за следене на текущият резултат на активния играч
-let currentScore = 0;
-// активен играч
-let activePlayer = 0;
-let playing = true;
+let score, currentScore, activePlayer, player;
+const init = function () {
+  // Възстановяване на резултатите на 0
+  const scores = [0, 0];
+  //Тази променлива се използва за следене на текущият резултат на активния играч
+  let currentScore = 0;
+  score = 0;
+  currentScore = 0;
+  activePlayer = 0; // Зависи кой искате да е началния активен играч
+  playing = true;
 
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+
+  // Скриване на зарчето
+  diceEl.classList.add('hidden');
+  // Премахване на класове за победител и активен играч
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner', 'player--active');
+  player0El.classList.add('player--active'); // Нека първ
+};
+init();
 const switchPlayer = function () {
   document.getElementById(`current--${activePlayer}`).textContent = 0;
   currentScore = 0;
@@ -84,3 +92,4 @@ btnHold.addEventListener('click', function () {
     }
   }
 });
+btnNew.addEventListener('click', init);
