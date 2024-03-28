@@ -3,28 +3,22 @@
 //отделяме резултата на всеки играч в собствена променслива за всеки играч
 const player0El = document.querySelector('.player--0');
 const player1El = document.querySelector('.player--1');
-//оделяме всеки един резилтат с натрупване в променлива
 const score0El = document.querySelector('#score--0');
 const score1El = document.getElementById('score--1');
-// текущ резултат
 const current0El = document.getElementById('current--0');
 const current1El = document.getElementById('current--1');
-//зарчето
+
 const diceEl = document.querySelector('.dice');
-//изнасяне на бутоните
 const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
-let score, currentScore, activePlayer, player;
+let scores, currentScore, activePlayer, playing;
+
 const init = function () {
-  // Възстановяване на резултатите на 0
-  const scores = [0, 0];
-  //Тази променлива се използва за следене на текущият резултат на активния играч
-  let currentScore = 0;
-  score = 0;
+  scores = [0, 0];
   currentScore = 0;
-  activePlayer = 0; // Зависи кой искате да е началния активен играч
+  activePlayer = 0;
   playing = true;
 
   score0El.textContent = 0;
@@ -34,12 +28,13 @@ const init = function () {
 
   // Скриване на зарчето
   diceEl.classList.add('hidden');
-  // Премахване на класове за победител и активен играч
   player0El.classList.remove('player--winner');
-  player1El.classList.remove('player--winner', 'player--active');
-  player0El.classList.add('player--active'); // Нека първ
+  player1El.classList.remove('player--winner');
+  player1El.classList.remove('player--active');
+  player0El.classList.add('player--active');
 };
 init();
+
 const switchPlayer = function () {
   document.getElementById(`current--${activePlayer}`).textContent = 0;
   currentScore = 0;
@@ -55,7 +50,7 @@ btnRoll.addEventListener('click', function () {
     const dice = Math.trunc(Math.random() * 6) + 1;
     //2.display dice
     diceEl.classList.remove('hidden');
-    diceEl.src = 'dice-${dice}.png';
+    diceEl.src = `dice-${dice}.png`;
     //3.check for rolled 1:
     if (dice !== 1) {
       //add dice to current score
